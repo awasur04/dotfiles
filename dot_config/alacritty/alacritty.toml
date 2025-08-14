@@ -22,4 +22,4 @@ dimensions = { columns = 100, lines = 45 }
 normal = { family = "AnonymicePro Nerd Font", style = "Regular" }
 bold = { family = "AnonymicePro Nerd Font", style = "Bold" }
 italic = { family = "AnonymicePro Nerd Font", style = "Italic" }
-size = 13
+size = 15
