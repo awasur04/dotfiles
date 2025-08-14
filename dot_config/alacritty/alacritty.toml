@@ -8,7 +8,6 @@ general.import = [
 
 [terminal.shell]
 program = "tmux"
-args = ["attach", "-t", "main", "||", "new", "-s", "main"]
 
 [env]
 TERM = "xterm-256color"
@@ -19,14 +18,7 @@ dimensions = { columns = 100, lines = 45 }
 
 
 [font]
-<<<<<<< Updated upstream
-normal = { family = "AnonymicePro Nerd Font", style = "Regular" }
-bold = { family = "AnonymicePro Nerd Font", style = "Bold" }
-italic = { family = "AnonymicePro Nerd Font", style = "Italic" }
-size = 15
-=======
 normal = { family = "UbuntuMono Nerd Font", style = "Regular" }
 bold = { family = "UbuntuMono Nerd Font", style = "Bold" }
 italic = { family = "UbuntuMono Nerd Font", style = "Italic" }
-size = 13
->>>>>>> Stashed changes
+size = 15
