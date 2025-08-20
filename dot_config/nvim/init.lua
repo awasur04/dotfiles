@@ -3,6 +3,7 @@ vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.g.mapleader = " "
+vim.opt.wrap = false
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -26,6 +27,7 @@ vim.opt.rtp:prepend(lazypath)
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+vim.wo.relativenumber = true
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -34,7 +36,8 @@ require("lazy").setup({
     { 'nvim-telescope/telescope.nvim', tag = '0.1.8',
       dependencies = { 'nvim-lua/plenary.nvim' }
     },
-    {"nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate"}
+    {"nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate"},
+    {"folke/which-key.nvim", event="VeryLazy", opts={}},
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -53,5 +56,11 @@ config.setup({
   highlight = { enable = true },
   indent = { enable = true }
 })
+
+local whichkey = require("which-key").setup({
+  triggers = "auto"
+})
+
+
 
 vim.cmd.colorscheme "catppuccin"

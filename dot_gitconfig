@@ -1,0 +1,11 @@
+[user]
+	email = awasur04@yahoo.com
+	name = Adam
+[mergetool "nvim"]
+  cmd = nvim -f -c "Gdiffsplit!" "$MERGED"
+[merge]
+  tool = nvim
+[mergetool]
+  prompt = false
+[safe]
+	directory = /var/home/adam/Mounts/windows/pipedream
