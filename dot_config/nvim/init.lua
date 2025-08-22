@@ -38,6 +38,7 @@ require("lazy").setup({
     },
     {"nvim-treesitter/nvim-treesitter", branch = 'master', lazy = false, build = ":TSUpdate"},
     {"folke/which-key.nvim", event="VeryLazy", opts={}},
+    {"ThePrimeagen/harpoon", branch="harpoon2", dependencies={"nvim-lua/plenary.nvim"}},
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -46,10 +47,29 @@ require("lazy").setup({
   checker = { enabled = true },
 })
 
+
+ -- TELESCOPE SETUP
 local builtin = require("telescope.builtin")
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+local conf = require("telescope.config").values
+local function toggle_telescope(harpoon_files)
+    local file_paths = {}
+    for _, item in ipairs(harpoon_files.items) do
+        table.insert(file_paths, item.value)
+    end
 
+    require("telescope.pickers").new({}, {
+        prompt_title = "Harpoon",
+        finder = require("telescope.finders").new_table({
+            results = file_paths,
+        }),
+        previewer = conf.file_previewer({}),
+        sorter = conf.generic_sorter({}),
+    }):find()
+end
+
+-- TREESITTER SETUP
 local config = require("nvim-treesitter.configs")
 config.setup({
   ensure_installed = {"lua", "javascript", "typescript", "cpp", "vim", "html", "css"},
@@ -57,9 +77,28 @@ config.setup({
   indent = { enable = true }
 })
 
+-- WHICHKEY SETUP
 local whichkey = require("which-key").setup({
   triggers = "auto"
 })
+
+-- HARPOON SETUP
+local harpoon = require("harpoon").setup()
+vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+vim.keymap.set("n", "<leader>e", function() harpoon:list():remove(selected_entry) end)
+vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
+-- Toggle previous & next buffers stored within Harpoon list
+vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
+    { desc = "Open harpoon window" })
+
+
+
+
 
 
 
