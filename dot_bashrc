@@ -26,3 +26,5 @@ unset rc
 eval "$(starship init bash)"
 export EDITOR=/home/linuxbrew/.linuxbrew/bin/nvim
 alias vim=/home/linuxbrew/.linuxbrew/bin/nvim
+export PATH=$PATH:/usr/local/go/bin:/var/home/awasur04/go/bin
+export LS_COLORS="${LS_COLORS}:ow=30;42:"
